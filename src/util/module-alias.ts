@@ -1,4 +1,4 @@
-import path from 'path';
+import * as path from 'path';
 import modeAlias from 'module-alias';
 
 const files = path.resolve(__dirname, '../..');
