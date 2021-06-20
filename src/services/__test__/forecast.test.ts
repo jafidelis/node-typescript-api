@@ -18,6 +18,7 @@ describe('Forecast Service', () => {
         lng: 151.289824,
         name: 'Manly',
         position: BeachPosition.E,
+        user: 'fake-id',
       },
     ];
     const expectedResponse = [
@@ -95,9 +96,18 @@ describe('Forecast Service', () => {
   });
 
   it('should throw internal processing error when something goes wrong during the rating process', async () => {
+    const beaches: Beach[] = [
+      {
+        lat: -33.792726,
+        lng: 151.289824,
+        name: 'Manly',
+        position: BeachPosition.E,
+        user: 'fake-id',
+      },
+    ];
     mockedStormGlassService.fetchPoints.mockRejectedValue('Error fething data');
     const forecast = new Forecast(mockedStormGlassService);
-    await expect(forecast.processForecastForBeaches).rejects.toThrow(
+    await expect(forecast.processForecastForBeaches(beaches)).rejects.toThrow(
       ForecastProcessingInternalError
     );
   });

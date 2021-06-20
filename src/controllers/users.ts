@@ -33,7 +33,7 @@ export class UsersController extends BaseController {
         error: 'Password does not match!',
       });
     }
-    // const token = AuthService.generateToken(user.toJSON());
-    return res.status(200).send({ token: '' });
+    const token = AuthService.generateToken(user.toJSON());
+    return res.status(200).send({ ...user.toJSON(), ...{ token } });
   }
 }
